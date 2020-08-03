@@ -5,6 +5,9 @@ class Main {
   static card pileCard = new card();
   static Scanner brad = new Scanner(System.in);
 
+  /*
+    The main class for the crazy eights game that handles the game loop, cpu turns, and checking of cards.
+   */
   public static void main(String[] args) {
     do{
       running = true;
@@ -47,6 +50,10 @@ class Main {
     }while(again());
   }
 
+  /*
+    Asks the user if they would like to play the game again.
+    @return - boolean stating whether to execute another game
+   */
   public static boolean again(){
     clearScreen();
     System.out.print("Would you like to play again? (y/n) -> ");
@@ -54,6 +61,11 @@ class Main {
     return ui == 'y' || ui == 'Y';
   }
 
+  /*
+    Displays the card count and top card info.
+    @param - player array of the bots
+    @param - user player object
+   */
   public static void dispInfo(player[] comps, player user){
     System.out.println("Card Counts:");
     System.out.println("Player: " + user.cardCount());
@@ -69,6 +81,9 @@ class Main {
     System.out.println(pileCard.cardColor() + " " + pileCard.cardNum());
   }
 
+  /*
+    Delays the program for the specified amount of milliseconds
+   */
   public static void delay(int time_ms){
     try {
       Thread.sleep(time_ms);
@@ -77,6 +92,9 @@ class Main {
     }
   }
 
+  /*
+    Puts a new card on the top of the pile that is not a draw 2 card.
+   */
   public static void newCard(){
     card temp = new card();
     do{
@@ -85,6 +103,10 @@ class Main {
     pileCard = temp;
   }
 
+  /*
+    Executes the cpu's turn to place down a card,
+    @param - the player object of the specific cpu
+   */
   public static void cpuTurn(player p){
     if(pileCard.isDrawCard()){
       System.out.println("Drawing 2 cards...");
@@ -110,6 +132,10 @@ class Main {
     p.removeCard(cpuChoice);
   }
 
+  /*
+    Executes the player's turn to place down one of their cards
+    @param - the player object of the user
+   */
   public static void playerTurn(player p){
     if(pileCard.isDrawCard()){
       System.out.println("Drawing two cards...");
@@ -136,6 +162,11 @@ class Main {
     }
   }
 
+  /*
+    Checks to make sure the selected card has either the same number or color of the top card.
+    @param - card object of the selected object
+    @return - boolean whether the card can be placed
+   */
   public static boolean checkCard(card c){
     if(c.cardColor().equals(pileCard.cardColor())){
       return true;
@@ -148,11 +179,17 @@ class Main {
     }
   }
 
+  /*
+    Clears the console.
+   */
   public static void clearScreen() {  
     System.out.print("\033[H\033[2J");  
     System.out.flush();  
   }
 
+  /*
+    Displays the main menu and asks for user input to begin or display instructions
+   */
   public static void mainMenu(){
     boolean playGame = false;
     while(!playGame){
@@ -169,6 +206,9 @@ class Main {
     }
   }
 
+  /*
+    Displays the instructions for 15 seconds.
+   */
   public static void dispInstr(){
     clearScreen();
     System.out.println("Objective of the game:");
